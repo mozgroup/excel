@@ -1,10 +1,10 @@
 source 'http://rubygems.org'
 
-gem 'spreadsheet', '0.6.4.1'
+gem "sinatra"
+gem "win32-api"
 
 
-
-gem 'sqlite3-ruby', :require => 'sqlite3'
+#gem 'sqlite3-ruby', :require => 'sqlite3'
 
 # Use unicorn as the web server
 # gem 'unicorn'

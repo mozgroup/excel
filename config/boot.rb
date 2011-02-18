@@ -1,5 +1,5 @@
 require 'rubygems'
-require 'spreadsheet'
+require "bundler/setup"
 
 # Set up gems listed in the Gemfile.
 gemfile = File.expand_path('../Gemfile', __FILE__)
