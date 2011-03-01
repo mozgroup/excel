@@ -2,7 +2,10 @@ source 'http://rubygems.org'
 
 gem "sinatra"
 gem "win32-api"
-
+gem 'json', '1.4.6'
+gem 'rest-client'
+gem 'mysql'
+gem 'activerecord'
 
 #gem 'sqlite3-ruby', :require => 'sqlite3'
 
