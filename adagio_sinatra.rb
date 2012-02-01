@@ -25,6 +25,43 @@ get '/import_tracking_info' do
   return csv_array
 end
 
+post '/createLIInvoiceRequests/?' do
+  order_line_items = params[:order_items]
+  order_line_items.each_value{|order_line_item| 
+    string_array = order_line_item['string_array']
+    numeric_array = order_line_item['numeric_array']
+    sorted = string_array.sort_by{|hash| hash[0].to_i}
+    sorted.each{|hash|
+        puts "hash[0]:#{hash[0]} hash[1]:#{hash[1]}"
+        puts '.....end string hash'
+    }
+    
+    sorted = numeric_array.sort_by{|hash| hash[0].to_i}
+    sorted.each{|hash|
+        puts "hash[0]:#{hash[0]} hash[1]:#{hash[1]}"
+        puts '.....end numeric_array hash'
+    }
+  }
+  
+  begin
+    xls_path = "C:\\Ruby187\\sinatra_projects\\excel\\A.xls"
+    excel = WIN32OLE.new('Excel.Application')
+    sheet = excel.Workbooks.Open(xls_path).Worksheets(1)
+    sheet.Range('A1:A3').columns.each { |col| col.cells.each { |cell| puts cell['Value'] } }
+  rescue  Exception => e
+    puts "XMLRPC error: create Adagio DBF"
+    puts e.message
+    puts e.backtrace.inspect
+  ensure
+    excel.quit
+  end
+  
+  return 'done'
+end
+post 'createTHTHInvoiceRequests' do
+  puts 'posting THTG'
+end
+
 get '/invoice_results' do
 content_type :json 
   invoices = Array.new
@@ -52,6 +89,7 @@ end
 get '/' do
   begin
     xls_path = "C:\\Ruby187\\rails_projects\\excel-clone\\TEST_AREXPORT.xls"
+    xls_path = "C:\\Ruby187\\sinatra_projects\\excel\\TEST_AREXPORT.xls"
     excel = WIN32OLE.new('Excel.Application')
     sheet = excel.Workbooks.Open(xls_path).Worksheets(1)
     sheet.Range('A1:A3').columns.each { |col| col.cells.each { |cell| puts cell['Value'] } }
